@@ -7,4 +7,4 @@ cps can be specified via command line:
 ```
 ./clicker (click interval in ms)
 ```
-TODO: add a gui for specifying cps
+
