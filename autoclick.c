@@ -14,6 +14,7 @@
 
 #include <unistd.h>  // For usleep
 
+
 void click() {
     printf("Attempting to click...\n");
 
@@ -25,13 +26,15 @@ void click() {
 
     printf("X11 display opened successfully.\n");
 
+    // Simulate mouse button press
     XTestFakeButtonEvent(display, Button1, True, 0);
     XFlush(display);
     printf("Mouse button pressed.\n");
 
+    // Small delay to simulate a real click
     usleep(10000);
 
-
+    // Simulate mouse button release
     XTestFakeButtonEvent(display, Button1, False, 0);
     XFlush(display);
     printf("Mouse button released.\n");

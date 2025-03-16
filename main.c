@@ -13,18 +13,26 @@
 #include "main.h"
 
 
-
+#include <unistd.h>
 
 #include <pthread.h>
 #include <stdbool.h>
-#include <unistd.h>
+#include <stdlib.h>
+#include <ncurses.h>
+#include <X11/keysymdef.h>
+#include <X11/keysym.h>
+#include "keypress.h"
+
 
 
 bool auto_clicking = false;
 unsigned int click_interval = 2000;
+bool running = true;
 
 static long count = 0;
 static pthread_t thread;
+
+
 
 void *auto_click_thread(void *arg) {
     while (auto_clicking) {
@@ -50,7 +58,6 @@ void stop_auto_click(cgui_cell *c) {
 
 
 
-
 int main(int argc, char **argv) {
 
   if (argc > 1) {
@@ -62,6 +69,8 @@ int main(int argc, char **argv) {
             printf("Invalid interval. Using default: %d ms\n", click_interval);
         }
     }
+
+
 
     cgui_window *window;
     cgui_grid *grid;
@@ -80,8 +89,8 @@ int main(int argc, char **argv) {
     filler = cgui_stripes_create();
 
     cgui_label_set(label, "Auto Clicker");
-    cgui_button_set_label(button_start, "Start");
-    cgui_button_set_label(button_stop, "Stop");
+    cgui_button_set_label(button_start, "Start (F6)");
+    cgui_button_set_label(button_stop, "Stop (F7)");
 
     // Set button click handlers
     cgui_button_on_click(button_start, start_auto_click);
@@ -98,14 +107,17 @@ int main(int argc, char **argv) {
 
     cgui_window_push_grid(window, grid);
     cgui_window_activate(window);
+    
+    pthread_t keypress_thread;
+    pthread_create(&keypress_thread, NULL, detect_keypress, NULL);
 
     cgui_run();
+
+    running = false;
+    pthread_join(keypress_thread, NULL);
 
     return 0;
 }
 
-void settings() {
-
-}
 
 
