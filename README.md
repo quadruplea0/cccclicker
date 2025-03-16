@@ -5,6 +5,6 @@ Simple autoclicker made with cassette cgui
 
 cps can be specified via command line:
 ```
-./clicker (your cps * 1000, eg. 2000)
+./clicker (click interval in ms)
 ```
 TODO: add a gui for specifying cps
