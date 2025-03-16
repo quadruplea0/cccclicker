@@ -97,14 +97,15 @@ int main(int argc, char **argv) {
     cgui_button_on_click(button_stop, stop_auto_click);
 	
     cgui_grid_resize_col(grid, 0, 17);
-	cgui_grid_resize_col(grid, 1, 7);
-	cgui_grid_resize_col(grid, 2, 7);
+	cgui_grid_resize_col(grid, 1, 17);
+	cgui_grid_resize_col(grid, 2, 17);
+
 
     cgui_grid_assign_cell(grid, label, 0, 0, 3, 1);
     cgui_grid_assign_cell(grid, filler,  0, 1, 1, 1);	
     cgui_grid_assign_cell(grid, button_start, 1, 1, 1, 1);
     cgui_grid_assign_cell(grid, button_stop, 2, 1, 1, 1);
-
+  
     cgui_window_push_grid(window, grid);
     cgui_window_activate(window);
     
