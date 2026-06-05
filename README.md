@@ -7,4 +7,4 @@ cps can be specified via command line:
 ```
 ./clicker (click interval in ms)
 ```
-
+used to only work on x11 works on wayland now at least on my setup
